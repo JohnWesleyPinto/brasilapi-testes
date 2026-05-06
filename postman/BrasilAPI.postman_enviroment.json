@@ -1,0 +1,15 @@
+{
+	"id": "156da2db-3593-4eb4-b5ea-f5425100b38e",
+	"name": "BrasilAPi environment",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-05-06T09:25:40.477Z",
+	"_postman_exported_using": "Postman/11.72.3"
+}
