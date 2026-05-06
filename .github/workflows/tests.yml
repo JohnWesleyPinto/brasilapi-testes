@@ -27,15 +27,27 @@ jobs:
       - name: Allure Server
         run: allure serve allure-results
 
+
+      - name: Upload Report to AWS S3
+        if: always()
+        env: 
+          AWS_ACCESS_KEY_ID: ${{ secrets.SSKEYAWS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRETSSKEY }}
+          AWS_DEFAULT_REGION: us-east-2
+        run: |
+          aws s3 sync cypress/reports s3://brasil-api-allure/runs/${{github.run_id }} \
+            --exclude "*" \
+            --include "*.json"
+          
       - name: Generate Summary
-      if: always()
-      run: |
-        echo "### 📊 Resultado da Execução" >> $GITHUB_STEP_SUMMARY
-        echo "| Status | Descrição |" >> $GITHUB_STEP_SUMMARY
-        echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
-        echo "| ✅ | Testes Finalizados |" >> $GITHUB_STEP_SUMMARY
-        echo "Relatório completo disponível nos artefatos." >> $GITHUB_STEP_SUMMARY
-        echo http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/index.html >> $GITHUB_STEP_SUMMARY
+        if: always()
+        run: |
+          echo "### 📊 Resultado da Execução" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | Descrição |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| ✅ | Testes Finalizados |" >> $GITHUB_STEP_SUMMARY
+          echo "Relatório completo disponível nos artefatos." >> $GITHUB_STEP_SUMMARY
+          echo http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/index.html >> $GITHUB_STEP_SUMMARY
 
   cypress-tests:
     name: Cypress API Tests
