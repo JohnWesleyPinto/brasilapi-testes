@@ -27,9 +27,7 @@ jobs:
       - name: Install Allure CLI
         if: always()
         run: |
-          sudo apt-add-repository ppa:qameta/allure -y
-          sudo apt-get update
-          sudo apt-get install allure -y
+          npm install -g allure-commandline
 
       - name: Generate Allure Report
         if: always()
