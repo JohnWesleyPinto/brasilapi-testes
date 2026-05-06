@@ -27,6 +27,15 @@ jobs:
       - name: Allure Server
         run: allure serve allure-results
 
+      - name: Generate Summary
+      if: always()
+      run: |
+        echo "### 📊 Resultado da Execução" >> $GITHUB_STEP_SUMMARY
+        echo "| Status | Descrição |" >> $GITHUB_STEP_SUMMARY
+        echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+        echo "| ✅ | Testes Finalizados |" >> $GITHUB_STEP_SUMMARY
+        echo "Relatório completo disponível nos artefatos." >> $GITHUB_STEP_SUMMARY
+
   cypress-tests:
     name: Cypress API Tests
     runs-on: ubuntu-latest
