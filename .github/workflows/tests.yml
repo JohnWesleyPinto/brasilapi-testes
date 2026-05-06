@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-    java-tests:
+  java-tests:
     name: Java API Tests
     runs-on: ubuntu-latest
 
@@ -26,12 +26,11 @@ jobs:
 
       - name: Generate Allure static report
         if: always()
-        run: |
-          mvn allure:report
+        run: mvn allure:report
 
       - name: Configure AWS credentials
         if: always()
-        uses: aws-actions/configure-aws-credentials@v6.1.1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.SSKEYAWS }}
           aws-secret-access-key: ${{ secrets.SECRETSSKEY }}
@@ -53,6 +52,7 @@ jobs:
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Status | Testes finalizados |" >> $GITHUB_STEP_SUMMARY
           echo "| Relatório Allure | [Abrir relatório]($REPORT_URL) |" >> $GITHUB_STEP_SUMMARY
+
   cypress-tests:
     name: Cypress API Tests
     runs-on: ubuntu-latest
