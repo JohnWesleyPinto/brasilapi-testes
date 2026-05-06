@@ -22,30 +22,29 @@ jobs:
           java-version: 21
 
       - name: Run Maven tests
-        run: mvn test
+        run: mvn clean test
 
-      - name: Generate Allure static report
+      - name: Install Allure CLI
         if: always()
         run: |
-          mvn io.qameta.allure:allure-maven:report
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure -y
 
-      - name: Configure AWS credentials
+      - name: Generate Allure Report
         if: always()
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.SSKEYAWS }}
-          aws-secret-access-key: ${{ secrets.SECRETSSKEY }}
-          aws-region: us-east-2
+        run: |
+          allure generate target/allure-results --clean -o allure-report
 
       - name: Upload Allure report to AWS S3
         if: always()
         run: |
-          aws s3 sync target/site/allure-maven-plugin s3://brasil-api-allure/runs/${{ github.run_id }} --delete
+          aws s3 sync allure-report s3://brasil-api-allure/runs/${{ github.run_id }} --delete
 
       - name: Generate Summary
         if: always()
         run: |
-          REPORT_URL="http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/allure-maven.html"
+          REPORT_URL="http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/index.html"
 
           echo "### 📊 Resultado da Execução" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -54,6 +53,7 @@ jobs:
           echo "| Status | Testes finalizados |" >> $GITHUB_STEP_SUMMARY
           echo "| Relatório Allure | [Abrir relatório]($REPORT_URL) |" >> $GITHUB_STEP_SUMMARY
 
+          
   cypress-tests:
     name: Cypress API Tests
     runs-on: ubuntu-latest
