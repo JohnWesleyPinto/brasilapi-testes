@@ -26,7 +26,8 @@ jobs:
 
       - name: Generate Allure static report
         if: always()
-        run: mvn allure:report
+        run: |
+          mvn io.qameta.allure:allure-maven:report
 
       - name: Configure AWS credentials
         if: always()
