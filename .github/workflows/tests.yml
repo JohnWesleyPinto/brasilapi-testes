@@ -45,7 +45,7 @@ jobs:
       - name: Generate Summary
         if: always()
         run: |
-          REPORT_URL="http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/index.html"
+          REPORT_URL="http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/allure-maven.html"
 
           echo "### 📊 Resultado da Execução" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
