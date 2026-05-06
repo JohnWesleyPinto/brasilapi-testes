@@ -35,6 +35,7 @@ jobs:
         echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
         echo "| ✅ | Testes Finalizados |" >> $GITHUB_STEP_SUMMARY
         echo "Relatório completo disponível nos artefatos." >> $GITHUB_STEP_SUMMARY
+        echo http://brasil-api-allure.s3-website.us-east-2.amazonaws.com/runs/${{ github.run_id }}/index.html >> $GITHUB_STEP_SUMMARY
 
   cypress-tests:
     name: Cypress API Tests
