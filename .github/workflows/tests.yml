@@ -24,6 +24,9 @@ jobs:
       - name: Run Maven tests
         run: mvn test
 
+      - name: Allure Server
+        run: allure serve allure-results
+
   cypress-tests:
     name: Cypress API Tests
     runs-on: ubuntu-latest
