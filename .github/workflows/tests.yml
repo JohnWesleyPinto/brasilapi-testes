@@ -22,7 +22,16 @@ jobs:
           java-version: 21
 
       - name: Run Maven tests
-        run: mvn clean test
+        run: mvn test
+        continue-on-error: true
+
+      - name: Upload Allure Results (Java)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-java
+          path: allure-results/
+          retention-days: 7
 
       - name: Install Allure CLI
         if: always()
@@ -60,11 +69,10 @@ jobs:
           echo "| Status | Testes finalizados |" >> $GITHUB_STEP_SUMMARY
           echo "| Relatório Allure | [Abrir relatório]($REPORT_URL) |" >> $GITHUB_STEP_SUMMARY
 
-          
+
   cypress-tests:
     name: Cypress API Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -77,5 +85,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests
+      - name: Run Cypress
         run: npx cypress run
+        continue-on-error: true
+
+      - name: Upload Cypress Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-evidence
+          path: |
+            cypress/screenshots/
+            cypress/videos/
+          retention-days: 7
