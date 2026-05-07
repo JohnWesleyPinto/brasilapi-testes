@@ -3,7 +3,7 @@ describe('BrasilAPI - Testes de API', () => {
     it('Deve consultar CEP válido', () => {
         cy.request({
             method: 'GET',
-            url: '/api/cep/v2/01001000'
+            url: '/api/cep/v2/58297000'
         }).then((response) => {
 
             expect(response.status).to.eq(200)
@@ -14,7 +14,7 @@ describe('BrasilAPI - Testes de API', () => {
             expect(response.body).to.have.property('neighborhood')
             expect(response.body).to.have.property('street')
 
-            expect(response.body.cep).to.eq('01001000')
+            expect(response.body.cep).to.eq('58297000')
             expect(response.body.state).to.eq('SP')
         })
     })

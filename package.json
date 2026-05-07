@@ -170,5 +170,5 @@
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
   },
-  "description": ""
+  "description": "![Automated Tests](https://github.com/JohnWesleyPinto/brasilapi-testes/actions/workflows/tests.yml/badge.svg) # BrasilAPI testes"
 }

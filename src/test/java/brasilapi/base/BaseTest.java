@@ -3,7 +3,7 @@ package brasilapi.base;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
-public class BaseTeste {
+public class BaseTest {
 
     protected static final String BASE_URI = "https://brasilapi.com.br";
 

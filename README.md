@@ -129,8 +129,7 @@ Usados como validação complementar de API com JavaScript, demonstrando:
 
 ## Melhorias futuras
 
-- Adicionar relatório Allure
-- Adicionar pipeline de CI/CD com GitHub Actions
+
 - Adicionar testes parametrizados
 - Adicionar validação de schema JSON
 - Aumentar cobertura de endpoints

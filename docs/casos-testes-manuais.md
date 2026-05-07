@@ -27,12 +27,12 @@ Positivo
 GET /api/cep/v2/{cep}
 
 ### Massa de teste
-01001000
+58297000
 
 ### Passos
 1. Abrir o Insomnia
 2. Realizar requisição GET:
-   /api/cep/v2/01001000
+   /api/cep/v2/58297000
 3. Enviar requisição
 
 ### Resultado esperado
@@ -168,14 +168,14 @@ Média
 Positivo
 
 ### Massa de teste
-2024
+2026
 
 ### Endpoint
-GET /api/feriados/v1/2024
+GET /api/feriados/v1/2026
 
 ### Passos
 1. Realizar GET:
-   /api/feriados/v1/2024
+   /api/feriados/v1/2026
 2. Enviar requisição
 
 ### Resultado esperado
@@ -230,11 +230,11 @@ Positivo
 11
 
 ### Endpoint
-GET /api/ddd/v1/11
+GET /api/ddd/v1/83
 
 ### Passos
 1. Realizar GET:
-   /api/ddd/v1/11
+   /api/ddd/v1/83
 2. Enviar requisição
 
 ### Resultado esperado

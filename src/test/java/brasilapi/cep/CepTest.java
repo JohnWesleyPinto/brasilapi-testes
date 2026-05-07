@@ -1,6 +1,6 @@
 package brasilapi.cep;
 
-import brasilapi.base.BaseTeste;
+import brasilapi.base.BaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,18 +9,18 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 
-public class CepTest extends BaseTeste {
+public class CepTest extends BaseTest {
     @Test
     @DisplayName("Deve consultar endereço ao informar CEP válido")
     public void deveConsultarCepValido() {
         given()
-                .pathParam("cep", "01001000")
+                .pathParam("cep", "58040530")
                 .when()
                 .get(CEP_V2)
                 .then()
                 .statusCode(200)
-                .body("cep", equalTo("01001000"))
-                .body("state", equalTo("SP"))
+                .body("cep", equalTo("58040530"))
+                .body("state", equalTo("PB"))
                 .body("city", notNullValue())
                 .body("neighborhood", notNullValue())
                 .body("street", notNullValue());
